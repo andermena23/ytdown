@@ -1,0 +1,11 @@
+{
+  "name": "ytdown-root",
+  "private": true,
+  "scripts": {
+  "dev": "concurrently \"npm --prefix server start\" \"npm --prefix vue-app run dev\"",
+  "install-all": "npm install && npm --prefix server install && npm --prefix vue-app install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
