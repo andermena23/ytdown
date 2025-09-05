@@ -25,29 +25,57 @@ async function ensureDownloadsDir() {
   }
 }
 
-app.post('/api/download', async (req, res) => {
+// Helper: get available formats for a video
+app.post('/api/formats', async (req, res) => {
   const { url } = req.body;
+  if (!url) return res.status(400).json({ error: 'No URL provided' });
+  try {
+    const info = await ytdlp.getInfo(url);
+    const formats = info.formats
+      .filter(f => f.ext && f.format_id)
+      .map(f => ({
+        format_id: f.format_id,
+        ext: f.ext,
+        resolution: f.resolution || f.height || '',
+        note: f.format_note || '',
+        filesize: f.filesize || '',
+        acodec: f.acodec,
+        vcodec: f.vcodec,
+        format: f.format,
+      }));
+    res.json({ formats });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Download endpoint with format selection
+app.post('/api/download', async (req, res) => {
+  const { url, format_id } = req.body;
   if (!url) return res.status(400).json({ error: 'No URL provided' });
   await ensureDownloadsDir();
   try {
-    const output = await ytdlp.downloadAsync(url, {
+    const downloadOptions = {
       output: path.join(DOWNLOADS_DIR, '%(title)s.%(ext)s'),
-      format: {
-        filter: 'audioandvideo',
-        type: 'mp4',
-        quality: 'highest',
-      },
       onProgress: (progress) => {
         console.log(progress);
       },
-    });
-    // Check if file exists
+    };
+
+    // If format_id is provided, use it
+    if (format_id) {
+      downloadOptions.format = format_id;
+    } else {
+      // fallback to best available
+      downloadOptions.format = 'bestvideo+bestaudio/best';
+    }
+
+    const output = await ytdlp.downloadAsync(url, downloadOptions);
+
     if (output && output.length > 0) {
-      const filename = output[0] && output[0].filename ? output[0].filename : '';
-      console.log('Sending download complete response to client:', output);
+      const filename = output[0]?.filename || '';
       res.json({ message: 'Download complete', output, filename });
     } else {
-      console.log('Download failed: No output file.');
       res.status(500).json({ error: 'Download failed: No output file.' });
     }
   } catch (error) {
