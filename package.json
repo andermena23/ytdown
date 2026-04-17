@@ -1,11 +1,19 @@
 {
   "name": "ytdown-root",
   "private": true,
+  "workspaces": [
+    "server",
+    "vue-app"
+  ],
   "scripts": {
-  "dev": "concurrently \"npm --prefix server start\" \"npm --prefix vue-app run dev\"",
-  "install-all": "npm install && npm --prefix server install && npm --prefix vue-app install"
+    "start": "node launch.js",
+    "dev": "concurrently \"npm --prefix server start\" \"npm --prefix vue-app run dev\"",
+    "restart": "node restart.js",
+    "install-all": "npm install && npm --prefix server install && npm --prefix vue-app install"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "dotenv": "^17.4.2",
+    "kill-port": "^2.0.1"
   }
 }

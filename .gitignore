@@ -30,3 +30,7 @@ coverage/
 
 # Downloads
 downloads/
+
+# Per-package lockfiles (managed at root via workspaces)
+server/package-lock.json
+vue-app/package-lock.json

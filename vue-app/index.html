@@ -3,7 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Downloader</title>
+  <title>YTDOWN</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#5ffcce",
+            "surface-container-highest": "#262626",
+            "on-surface": "#ffffff",
+            "inverse-on-surface": "#565555",
+            "tertiary-container": "#00e0fd",
+            "surface-bright": "#2c2c2c",
+            "surface": "#0e0e0e",
+            "error": "#ff716c",
+            "on-secondary-fixed": "#004937",
+            "on-tertiary-container": "#004b56",
+            "on-tertiary": "#005561",
+            "on-primary": "#00623f",
+            "on-error-container": "#ffa8a3",
+            "primary-dim": "#7cf0b5",
+            "on-error": "#490006",
+            "background": "#0e0e0e",
+            "surface-variant": "#262626",
+            "secondary-container": "#006c53",
+            "primary": "#8bffc3",
+            "on-secondary-fixed-variant": "#006851",
+            "on-primary-fixed": "#004d31",
+            "surface-container-high": "#20201f",
+            "on-tertiary-fixed": "#00363e",
+            "on-secondary": "#005d48",
+            "on-tertiary-fixed-variant": "#005561",
+            "surface-container-lowest": "#000000",
+            "secondary-fixed": "#5ffcce",
+            "on-background": "#ffffff",
+            "surface-container-low": "#131313",
+            "outline-variant": "#484847",
+            "tertiary-fixed-dim": "#00d1ec",
+            "secondary-dim": "#4dedc0",
+            "primary-fixed": "#8bffc3",
+            "on-surface-variant": "#adaaaa",
+            "primary-fixed-dim": "#7cf0b5",
+            "on-secondary-container": "#dffff0",
+            "inverse-surface": "#fcf9f8",
+            "tertiary-fixed": "#00e0fd",
+            "tertiary": "#7be9ff",
+            "surface-tint": "#8bffc3",
+            "surface-container": "#1a1a1a",
+            "outline": "#767575",
+            "on-primary-container": "#002918",
+            "inverse-primary": "#006d47",
+            "error-container": "#9f0519",
+            "secondary-fixed-dim": "#4dedc0",
+            "on-primary-fixed-variant": "#006d47",
+            "tertiary-dim": "#00d1ec",
+            "primary-container": "#3db47f",
+            "surface-dim": "#0e0e0e",
+            "error-dim": "#d7383b"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
 </head>
 <body>
   <div id="app"></div>
